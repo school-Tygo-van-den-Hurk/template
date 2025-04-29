@@ -4,48 +4,86 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... } @ inputs: flake-utils.lib.eachDefaultSystem ( system:
-    let
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      treefmt-nix,
+      ...
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
 
-      pkgs = import nixpkgs { inherit system; };
-      
-    in rec {
+        pkgs = import nixpkgs { inherit system; };
+        treefmtEval = treefmt-nix.lib.evalModule pkgs ./.config/treefmt.nix;
 
-      formater = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+      in
+      rec {
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Develop ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
-      checks.default = self.packages.${system}.default;
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            act # Run / check GitHub Actions locally.
+          ];
+        };
 
-      devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs; [ 
-          act # Run GitHub Actions locally.
-        ];
-      };
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Build ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
-      packages.default = pkgs.stdenv.mkDerivation rec {
-        name = "default";
-        src = ./.;
-        buildInputs = with pkgs; [ ];
+        packages.default = pkgs.stdenv.mkDerivation rec {
+          name = "default";
+          src = ./.;
+          buildInputs = with pkgs; [ ];
 
-        buildPhase = ''
-          runHook preBuild
+          buildPhase = ''
+            runHook preBuild
 
-          # ...
+            # ...
 
-          runHook postBuild
-        '';
+            runHook postBuild
+          '';
 
-        installPhase = ''
-          runHook preInstall
-          
-          mkdir --parents $out
+          checkPhase = ''
+            runHook preCheck
 
-          # ...
-            
-          runHook postInstall
-        '';
-      };
-    }
-  );
+            # ...
+
+            runHook postCheck
+          '';
+
+          installPhase = ''
+            runHook preInstall
+
+            mkdir --parents $out
+
+            touch $out 
+            # ...
+              
+            runHook postInstall
+          '';
+        };
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Flake Check ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+        checks = packages // {
+          formatting = treefmtEval.config.build.check self;
+        };
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Fmt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+        formatter = treefmtEval.config.build.wrapper;
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+      }
+    );
 }
