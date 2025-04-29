@@ -1,15 +1,11 @@
 name: Automerge Dependabot
 
 on:
-#   pull_request:
-#     types:
-#       - opened
-#       - synchronize
-#       - reopened
-  workflow_run:
-    workflows: [Nix Flake Checks]
+  pull_request:
     types:
-      - completed
+      - opened
+      - synchronize
+      - reopened
 
 permissions:
   contents: write       # To push merges
