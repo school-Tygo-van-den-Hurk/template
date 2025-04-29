@@ -1,11 +1,15 @@
 name: Automerge Dependabot
 
 on:
-  pull_request:
+#   pull_request:
+#     types:
+#       - opened
+#       - synchronize
+#       - reopened
+  workflow_run:
+    workflows: [Nix Flake Checks]
     types:
-      - opened
-      - synchronize
-      - reopened
+      - completed
 
 permissions:
   contents: write       # To push merges
@@ -71,5 +75,5 @@ jobs:
             };
             console.log(x_arg);
 
-            const response = await github.pulls.merge(x_arg);
+            const response = await github.rest.pulls.merge(x_arg);
             console.log(response);
