@@ -68,7 +68,6 @@ jobs:
               merge_method: 'merge',
               commit_title: 'Automated merge by GitHub Actions',
               commit_message: 'Merging Dependabot PR with admin privileges.'
-              bypass_automatic_merge: true
             };
             console.log(arg);
 
