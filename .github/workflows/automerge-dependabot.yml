@@ -7,6 +7,10 @@ on:
       - synchronize
       - reopened
 
+permissions:
+  contents: write       # To push merges
+  pull-requests: write  # To comment, approve, or merge PRs
+  
 jobs:
   automerge:
     runs-on: ubuntu-latest
