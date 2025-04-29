@@ -16,6 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor == 'dependabot[bot]'
     steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v30
+      - name: "Nix flake checks"
+        run: nix flake check --show-trace --all-systems
       - name: Check if it's a patch update
         id: check
         env:
@@ -50,19 +54,18 @@ jobs:
           else 
               echo "patch_update=false"
           fi
-      - name: Auto-merge PR
+      - name: Auto-merge PR (by bypassing status checks)
         uses: actions/github-script@0.2.0
         with:
           script: |
-            github.pullRequests.createReview({
-              owner: context.payload.repository.owner.login,
-              repo: context.payload.repository.name,
+            github.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               pull_number: context.payload.pull_request.number,
-              event: 'APPROVE'
+              merge_method: 'merge',  # or 'squash' or 'rebase'
+              commit_title: 'Automated merge by GitHub Actions',
+              commit_message: 'Merging Dependabot PR with admin privileges.',
+              bypass_automatic_merge: true
             })
-            github.pullRequests.merge({
-              owner: context.payload.repository.owner.login,
-              repo: context.payload.repository.name,
-              pull_number: context.payload.pull_request.number
-            })
-          github-token: ${{github.token}}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
