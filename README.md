@@ -15,9 +15,6 @@
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/nix-flake-check.yml">
         <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/Nix%20Flake%20Checks/badge.svg?style=flat" alt="GitHub tests status" />
     </a>
-    <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/nix-format-check.yml">
-        <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/Nix%20Format%20Checks/badge.svg?style=flat" alt="GitHub nix formatting check status" />
-    </a>
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/automerge-dependabot.yml">
         <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/Automerge%20Dependabot/badge.svg?style=flat" alt="GitHub dependabot automerge status" />
     </a>
