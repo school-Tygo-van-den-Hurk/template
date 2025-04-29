@@ -62,8 +62,8 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const arg = {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+              owner: context.payload.repository.owner.login,
+              repo: context.payload.repository.name,
               pull_number: context.payload.pull_request.number,
               merge_method: 'merge',
               commit_title: 'Automated merge by GitHub Actions',
