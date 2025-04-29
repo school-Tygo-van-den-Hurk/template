@@ -61,12 +61,16 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            github.pulls.merge({
+            const arg = {
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.payload.pull_request.number,
-              merge_method: 'merge',  # or 'squash' or 'rebase'
+              merge_method: 'merge',
               commit_title: 'Automated merge by GitHub Actions',
-              commit_message: 'Merging Dependabot PR with admin privileges.',
+              commit_message: 'Merging Dependabot PR with admin privileges.'
               bypass_automatic_merge: true
-            })
+            };
+            console.log(arg);
+
+            const response = await github.pulls.merge();
+            console.log(response);
