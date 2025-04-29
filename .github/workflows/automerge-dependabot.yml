@@ -56,7 +56,10 @@ jobs:
           fi
       - name: Auto-merge PR (by bypassing status checks)
         uses: actions/github-script@0.2.0
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.pulls.merge({
               owner: context.repo.owner,
@@ -67,5 +70,3 @@ jobs:
               commit_message: 'Merging Dependabot PR with admin privileges.',
               bypass_automatic_merge: true
             })
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
