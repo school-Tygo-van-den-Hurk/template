@@ -1,1 +1,9 @@
+### Git Ignore list
+
+.direnv
+
+# Nix results
+**/result
+**/result-*
+
 # Find common git ignore templates at: https://github.com/github/gitignore
