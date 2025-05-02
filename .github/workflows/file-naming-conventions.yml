@@ -11,23 +11,26 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Search for .capitalized files
+      - name: Search for files violating naming convention
         run: |
           echo "Looking for files with capital extensions..."
 
           # skip .git, and vendor directories
           matches=$(find . \
-            -path ./.git -prune -o \
-            -path ./node_modules -prune -o \
+            -name .git -prune -o \
+            -name node_modules -prune -o \
+            -name README.md -prune -o \
             -path ./vendor -prune -o \
-            -type f -print | grep -E '\.[A-Z]+$' || true)
+            -path ./CONTRIBUTING.md -prune -o \
+            -path ./LICENSE -prune -o \
+            -type f -print | grep -E '[A-Z ]+' || true)
           if [ -n "$matches" ]; then
-            echo "ERROR: Found files with capitalized extensions:"
+            echo "ERROR: Found files That do not respect naming convention:"
             echo ""
             echo "$matches"
             echo ""
-            echo "Please change the extension to something that isn't capitalized."
+            echo "Please rename the files to only use kebab or snake case."
             exit 1
           else
-            echo "No .MD files found."
+            echo "All files respect naming convention."
           fi
