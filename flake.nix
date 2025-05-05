@@ -7,6 +7,14 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -21,7 +29,7 @@
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
       flake-utils,
@@ -34,12 +42,23 @@
 
         pkgs = import nixpkgs { inherit system; };
         treefmtEval = treefmt-nix.lib.evalModule pkgs ./.config/treefmt.nix;
+        pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
+          src = ./.;
+          hooks.nix-flake-check = {
+            enable = true;
+            name = "Nix Flake Check";
+            entry = "nix flake check";
+            pass_filenames = false;
+            stages = [ "pre-push" ];
+          };
+        };
 
       in
       rec {
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Develop ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
         devShells.default = pkgs.mkShell {
+          inherit (pre-commit-check) shellHook;
           buildInputs = with pkgs; [
             act # Run / check GitHub Actions locally.
           ];
@@ -73,9 +92,9 @@
 
             mkdir --parents $out
 
-            touch $out 
+            touch $out
             # ...
-              
+
             runHook postInstall
           '';
         };
