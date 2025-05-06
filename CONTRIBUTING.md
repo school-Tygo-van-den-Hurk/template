@@ -6,6 +6,7 @@
 
 - [How to Develop](#how-to-develop)
   - [Getting started](#getting-started)
+    - [Setup a new project](#setup-a-new-project)
     - [Building](#building)
     - [Testing](#testing)
     - [Formatting](#formatting)
@@ -19,6 +20,14 @@ nix --version
 ```
 
 Make sure that `Nix` is above version `2.16.0`, otherwise I cannot guarantee that this will work. There is a devcontainer for those who are can't or don't have `Nix` installed. Look at the documentation for your IDE on how to work with devcontainers. 
+
+### Setup a new project
+First you want to set up the project. This means that:
+1. you wanna add the packages to the devShell in [`flake.nix`](flake.nix).
+2. next, you wanna add formatters to [`treefmt`](.config/treefmt.nix). See [the treefmt-nix repo](https://github.com/numtide/treefmt-nix) for more information on how. 
+3. Then you should add build scripts to build the packages. It is best practice to add the tests to the check phase.
+
+Only the first person needs to do this. After that, you'll have a repo that uses deterministic build environments, formatters, tests, and build checks. It will even be checked before push.
 
 ### Building
 To build run:
