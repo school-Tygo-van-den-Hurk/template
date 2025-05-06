@@ -1,5 +1,5 @@
 {
-  "name": "operating-systems-devcontainer",
+  "name": "devcontainer",
   "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
   "features": {
     "ghcr.io/devcontainers/features/nix:1": {
@@ -8,6 +8,8 @@
       "extraNixConfig": "experimental-features = nix-command flakes,sandbox = true"
     }
   },
+  "remoteUser": "codespace",
+  "postCreateCommand": "sudo chown -R $(whoami) /workspaces && curl -sfL https://direnv.net/install.sh | bash && direnv allow $(git rev-parse --show-toplevel) && echo 'eval \"$(direnv hook bash)\"' >> ~/.bashrc && echo 'eval \"$(direnv hook zsh)\"' >> ~/.zshrc",
   "customizations": {
     "vscode": {
       "extensions": [
