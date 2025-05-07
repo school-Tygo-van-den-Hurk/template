@@ -4,6 +4,11 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
 jobs:
   label-package-json:
     runs-on: ubuntu-latest
@@ -14,7 +19,7 @@ jobs:
       - name: Check for package.json changes
         id: changes
         run: |
-          git fetch origin ${{ github.base_ref }}
+          git fetch --unshallow origin ${{ github.base_ref }}
           git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -q "^package-lock.json$" && echo "changed=true" >> $GITHUB_OUTPUT || echo "changed=false" >> $GITHUB_OUTPUT
 
       - name: Create label if not exists
