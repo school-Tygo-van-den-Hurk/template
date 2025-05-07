@@ -1,4 +1,4 @@
-name: Label PR if package.json changed
+name: Label PR if cargo.lock changed
 
 on:
   pull_request:
@@ -10,17 +10,17 @@ permissions:
   issues: write
 
 jobs:
-  label-package-json:
+  label-cargo-lock:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: Check for package.json changes
+      - name: Check for cargo.lock changes
         id: changes
         run: |
           git fetch --unshallow origin ${{ github.base_ref }}
-          git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -q "^package-lock.json$" && echo "changed=true" >> $GITHUB_OUTPUT || echo "changed=false" >> $GITHUB_OUTPUT
+          git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -q "^cargo.lock" && echo "changed=true" >> $GITHUB_OUTPUT || echo "changed=false" >> $GITHUB_OUTPUT
 
       - name: Create label if not exists
         if: steps.changes.outputs.changed == 'true'
@@ -30,11 +30,11 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${{ github.repository }}/labels \
-            -d '{"name": "package-lock", "color": "e08331"}' || true
+            -d '{"name": "cargo-lock", "color": "e08331"}' || true
 
-      - name: Add label if package.json changed
+      - name: Add label if cargo.lock changed
         if: steps.changes.outputs.changed == 'true'
         uses: actions-ecosystem/action-add-labels@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          labels: package-json
+          labels: cargo.lock
