@@ -10,7 +10,7 @@ on:
 permissions:
   contents: write       # To push merges
   pull-requests: write  # To comment, approve, or merge PRs
-  
+
 jobs:
   automerge:
     runs-on: ubuntu-latest
@@ -30,28 +30,28 @@ jobs:
             echo "Invalid PR title: expected exactly two semantic versions" >&2
             exit 1
           fi
-          
+
           VERSION_FROM="${VERSIONS[0]}"
           VERSION_TO="${VERSIONS[1]}"
-          
+
           IFS='.' read -r MAJOR_FROM MINOR_FROM PATCH_FROM <<< "$VERSION_FROM"
           IFS='.' read -r MAJOR_TO MINOR_TO PATCH_TO <<< "$VERSION_TO"
-          
+
           MAJOR_FROM=$(echo $VERSION_FROM | cut -d. -f1)
           MINOR_FROM=$(echo $VERSION_FROM | cut -d. -f2)
           PATCH_FROM=$(echo $VERSION_FROM | cut -d. -f3)
-          
+
           echo "MAJOR_FROM: $MAJOR_FROM, MINOR_FROM: $MINOR_FROM, PATCH_FROM: $PATCH_FROM"
-          
+
           MAJOR_TO=$(echo $VERSION_TO | cut -d. -f1)
           MINOR_TO=$(echo $VERSION_TO | cut -d. -f2)
           PATCH_TO=$(echo $VERSION_TO | cut -d. -f3)
-          
+
           echo "MAJOR_TO: $MAJOR_TO, MINOR_TO: $MINOR_TO, PATCH_TO: $PATCH_TO"
-          
-          if [ "$MAJOR_FROM" = "$MAJOR_TO" ] && [ "$MINOR_FROM" = "$MINOR_TO" ]; then 
+
+          if [ "$MAJOR_FROM" = "$MAJOR_TO" ] && [ "$MINOR_FROM" = "$MINOR_TO" ]; then
               echo "patch_update=true"
-          else 
+          else
               echo "patch_update=false"
           fi
       - name: Auto-merge PR (by bypassing status checks)

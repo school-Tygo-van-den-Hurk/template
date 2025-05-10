@@ -13,7 +13,6 @@ indent_style = space
 trim_trailing_whitespace = true
 indent_size = 4
 
-
 #| Markdown – 2-space is typical and trailing whitespace must be kept
 
 [*.md]
@@ -103,3 +102,22 @@ indent_size = 2
 
 [*.nix]
 indent_size = 2
+
+
+#| Lock files and Licence files are generated and should not be checked
+
+[*.lock]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+
+[LICENSE]
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+
+[LICENSE*]
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
