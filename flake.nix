@@ -42,16 +42,7 @@
 
         pkgs = import nixpkgs { inherit system; };
         treefmtEval = treefmt-nix.lib.evalModule pkgs ./.config/treefmt.nix;
-        pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-          src = ./.;
-          hooks.nix-flake-check = {
-            enable = true;
-            name = "Nix Flake Check";
-            entry = "nix flake check";
-            pass_filenames = false;
-            stages = [ "pre-push" ];
-          };
-        };
+        pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run (import ./.config/pre-commit.nix);
 
       in
       rec {
@@ -59,9 +50,12 @@
 
         devShells.default = pkgs.mkShell {
           inherit (pre-commit-check) shellHook;
-          buildInputs = with pkgs; [
-            act # Run / check GitHub Actions locally.
-          ];
+          buildInputs =
+            pre-commit-check.enabledPackages
+            ++ (with pkgs; [
+              act # Run / check GitHub Actions locally.
+              git # Pull, commit, and push changes.
+            ]);
         };
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Build ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
@@ -103,6 +97,7 @@
 
         checks = packages // {
           formatting = treefmtEval.config.build.check self;
+          inherit pre-commit-check;
         };
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Fmt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
