@@ -14,6 +14,17 @@
       ];
     };
 
+    # disallows commits to certain branches.
+    no-commit-to-branch = {
+      enable = true;
+      settings.branch = [ "main" ];
+      stages = [
+        "pre-commit"
+        "pre-push"
+        "manual"
+      ];
+    };
+
     # Prevents committing binaries.
     check-added-large-files = {
       enable = true;
