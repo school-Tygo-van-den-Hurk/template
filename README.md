@@ -55,10 +55,11 @@
 
 # Template
 
-This is a repository that will function as a template for future school projects. 
+This is a repository that will function as a template for future school projects.
 
 ## Credits
-- Tygo van den Hurk <[@Tygo-van-den-Hurk](https://redirects.tygo.van.den.hurk.dev/github/personal/)>
+
+- Tygo van den Hurk \<[@Tygo-van-den-Hurk](https://redirects.tygo.van.den.hurk.dev/github/personal/)>
 - ...
 
 To see how to start or develop see [CONTRIBUTING.md](./CONTRIBUTING.md).
