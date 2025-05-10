@@ -56,45 +56,14 @@
     };
 
     # Checks markdown files for broken links, and bad syntax.
-    mdl = {
+    mdformat = {
       enable = true;
-      settings = {
-        rules = [
-          # https://github.com/markdownlint/markdownlint/blob/main/docs/RULES.md
-          "MD001"
-          "MD002"
-          "MD003"
-          "MD005"
-          "MD006"
-          "MD010"
-          "MD011"
-          "MD012"
-          "MD014"
-          "MD018"
-          "MD019"
-          "MD020"
-          "MD021"
-          "MD022"
-          "MD023"
-          "MD024"
-          "MD025"
-          "MD026"
-          "MD027"
-          "MD029"
-          "MD030"
-          "MD031"
-          "MD032"
-          "MD034"
-          "MD035"
-          "MD037"
-          "MD038"
-          "MD039"
-          "MD040"
-          "MD046"
-          "MD047"
-
-        ];
-      };
+      stages = [
+        "pre-commit"
+        "commit-msg"
+        "pre-push"
+        "manual"
+      ];
     };
 
   };
