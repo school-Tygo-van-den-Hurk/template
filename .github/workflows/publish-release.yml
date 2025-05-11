@@ -23,6 +23,7 @@ jobs:
         id: build-packages-from-flake
         run: |
           mkdir --parents artifacts
+          version="${{ github.ref_name }}"
           system=$(nix eval --impure --expr 'builtins.currentSystem' --json | jq -r .)
           mkdir --parents artifacts
           echo "building for ${system}:"
@@ -40,7 +41,7 @@ jobs:
           tag: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Upload Release Asset
         id: upload-release-asset
         uses: softprops/action-gh-release@v2.2.2
