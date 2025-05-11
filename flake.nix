@@ -85,8 +85,6 @@
             runHook preInstall
 
             mkdir --parents $out
-
-            touch $out
             # ...
 
             runHook postInstall
