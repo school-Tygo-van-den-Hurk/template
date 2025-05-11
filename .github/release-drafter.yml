@@ -89,28 +89,23 @@ header: ''
 footer: ''
 
 change-title-escapes: '\<*_&'
-change-template: '- [(#$NUMBER)]($URL) $TITLE by [$AUTHOR](https://github.com/$AUTHOR)'
+change-template: '- ([#$NUMBER]($URL)) $TITLE by [@$AUTHOR](https://github.com/$AUTHOR)'
 no-changes-template: '- No changes'
 category-template: |
   ## $TITLE
 
-  $CHANGES
-
 template: |
-  # v$RESOLVED_VERSION
+  These are the release notes for v$RESOLVED_VERSION:
 
   $CHANGES
+
+  ## Previous Release
+
+  You can see [the full changelog](https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION), [all releases](https://github.com/$OWNER/$REPOSITORY/releases/), or [the previous release ($PREVIOUS_TAG)](https://github.com/$OWNER/$REPOSITORY/releases/tag/$PREVIOUS_TAG) on GitHub.
 
   ## Contributors
 
   A big thanks to all contributors who helped with this release: $CONTRIBUTORS
-
-  ## Previous Release
-
-  You can see [the full changelog](https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION),
-  [all releases](https://github.com/$OWNER/$REPOSITORY/releases/),
-  or [the previous release $PREVIOUS_TAG](https://github.com/$OWNER/$REPOSITORY/releases/tag/$PREVIOUS_TAG) on GitHub.
-
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
