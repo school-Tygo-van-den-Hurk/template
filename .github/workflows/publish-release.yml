@@ -58,10 +58,10 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fail_on_unmatched_files: true
-          files: | # globs to files you want to upload:
-            artifacts/**/*.tar.gz
-            artifacts/**/*.pdf
-            artifacts/**/*.stl
+          # globs to files you want to upload:
+          # artifacts/**/*.pdf
+          # artifacts/**/*.stl
+          files: 'artifacts/**/*.tar.gz' # always created for each package in the flake
           # Do not change the body
           append_body: true
           body: ''
