@@ -89,11 +89,13 @@ header: ''
 footer: ''
 
 change-title-escapes: '\<*_&'
-change-template: '- #$NUMBER $TITLE by @$AUTHOR'
-no-changes-template: '- No changes'
+change-template: '| #$NUMBER | @$AUTHOR | $TITLE |'
+no-changes-template: 'No changes yet...'
 category-template: |
   ## $TITLE
 
+  | PR | Author | title |
+  |----|--------|-------|
 template: |
   These are the release notes for v$RESOLVED_VERSION:
 
