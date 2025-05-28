@@ -1,6 +1,6 @@
 name: PR Labeler
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, reopened]
     branches:
       - main
@@ -17,4 +17,5 @@ jobs:
     - name: Label Pull Request
       uses: actions/labeler@v5
       with:
+        sync-labels: true
         repo-token: ${{ secrets.GITHUB_TOKEN }}
