@@ -42,7 +42,9 @@
 
         pkgs = import nixpkgs { inherit system; };
         treefmtEval = treefmt-nix.lib.evalModule pkgs ./.config/treefmt.nix;
-        pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run (import ./.config/pre-commit.nix);
+        pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run (
+          import ./.config/pre-commit.nix { inherit pkgs; }
+        );
 
       in
       rec {

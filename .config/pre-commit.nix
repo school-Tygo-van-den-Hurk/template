@@ -1,5 +1,15 @@
 # See https://github.com/cachix/git-hooks.nix/blob/fa466640195d38ec97cf0493d6d6882bc4d14969/modules/hooks.nix
 {
+  pkgs,
+}:
+
+let
+
+  nix = "${pkgs.nix}/bin/nix --offline --extra-experimental-features nix-command --extra-experimental-features flakes";
+
+in
+{
+
   src = ./..;
   hooks = {
 
@@ -12,15 +22,27 @@
       ];
     };
 
+    # check formatting in the entire repository
+    formatting = {
+      enable = true;
+      name = "Formatting";
+      entry = "${nix} --show-trace fmt --no-write-lock-file --accept-flake-config";
+      pass_filenames = false;
+      language = "system";
+      stages = [
+        "pre-commit"
+      ];
+    };
+
     # Check if the flake passes all it's checks. (takes a long time)
     nix-flake-check = {
       enable = true;
       name = "Nix Flake Check";
       entry = "nix flake check";
       pass_filenames = false;
+      language = "system";
       stages = [
         "pre-push"
-        "manual"
       ];
     };
 
@@ -112,17 +134,6 @@
           "hurk"
         ];
       };
-    };
-
-    # Checks markdown files for broken links, and bad syntax.
-    mdformat = {
-      enable = true;
-      stages = [
-        "pre-commit"
-        "commit-msg"
-        "pre-push"
-        "manual"
-      ];
     };
 
     #! Requires an internet connection while in sandbox, thus does not work.
