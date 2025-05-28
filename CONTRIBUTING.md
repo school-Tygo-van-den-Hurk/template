@@ -13,7 +13,10 @@
     - [Pre-commit hooks](#pre-commit-hooks)
   - [Formatting](#formatting)
   - [Development shells](#development-shells)
-  - [Continuous Integration & Continuous Delivery (CI/CD)](#continuous-integration--continuous-delivery-cicd)
+  - [Branch Naming Conventions](#branch-naming-conventions)
+  - [Continuous Integration and Continuous Delivery (CI/CD)](#continuous-integration-and-continuous-delivery-cicd)
+    - [Checks](#checks)
+    - [Pull Requests and Releases](#pull-requests-and-releases)
 
 ## Getting started
 
@@ -116,11 +119,44 @@ will put you into a nix development shell every time you enter this repository f
 
 Development shell don't just add packages, they also set environment variables, or spin up services you might need. Because they are atomic, and deterministic we know that everything you code should be reproducible.
 
-## Continuous Integration & Continuous Delivery (CI/CD)
+## Branch Naming Conventions
 
-The code you write will be automagically tested and deployed on changes to `main` or when you make a pull request. If a mistake was made then these checks will fail, denying merger with the `main` branch. See [how to test locally](#testing).
+This repository uses branch naming conventions. Depending on what you're working on you should name your branch differently. Name it like one of these:
 
-The most important test is: **Nix flake check**: these are the checks defined in the [flake](./flake.nix). You can try this one yourself by running: `nix flake check`. Most of the time this contains a couple standard tests:
+- Name it `docs/*`, or `documentation/*` when working on documentation. Where `*` describes your branch. So for example: `docs/fix-typo`. Make sure to use [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
+- Name it `feat/*`, or `feature/*` when working on a feature. Where `*` describes your branch. So for example: `feat/add-macos-support`. Make sure to use [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
+- Name it `bug/*`, `fix/*`, or `fixes/*` when working on a bug fix. Where `*` describes your branch. So for example: `bug/fixes-memory-leak`. Make sure to use [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
+- Name it `deps/*`, or `dependencies/*` when updating dependencies. Where `*` describes your branch. So for example: `deps/update-xyz-from-v1.2.3-to-v4.5.6`. Make sure to use [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
 
-- Are the packages buildable? Run `nix build .#PACKAGE_NAME` for each package to see if the build wasn't broken. It is easier to run `nix flake check` and see if it is a package that fails instead of a command for each package.
-- Are the files properly formatted? You can fix any issues using `nix fmt`.
+These branch names will make it clear what your working on, and allows the [CI/CD](#continuous-integration-and-continuous-delivery-cicd) to label your PR better.
+
+## Continuous Integration and Continuous Delivery (CI/CD)
+
+When interacting with this repository CI/CD will run to give you feedback, or help us out with some things.
+
+### Checks
+
+The code you write will be automagically tested when you make a pull request. If a mistake was made then these checks will fail, denying merger with the `main` branch. See [how to test locally](#testing).
+
+The most important thing is: the **Nix flake check**. These are the checks defined in the [flake](./flake.nix). You can try this one yourself by running: `nix flake check`. Most of the time this contains a couple standard tests:
+
+- Are the packages buildable?
+- Are the files properly formatted?
+- Are there any spelling mistakes?
+- Are you not committing binaries to the repo?
+- Are you committing private keys to the repository?
+- Do executable files have a shebang, and are files with a shebang executable?
+
+All of these should be checked using `nix flake check`.
+
+### Pull Requests and Releases
+
+Checking isn't the only thing the CI/CD does. It also autolabels PRs, creates drafts for the next release, welcomes new contributors and more...
+
+One of the reasons that we use [these branch naming conventions](#branch-naming-conventions) is because this allows the CI/CD to label PRs automatically. Some examples are:
+
+- If you change a lock file, you will be labeled with "dependencies".
+- If you name your branch something that starts with `fixes/*` then you automatically get labeled as bug fix.
+- If you update a markdown file you will be labeled with "documentation".
+
+This is used for the release page where PRs are grouped by category. You are mentioned on the release page for any contributions you might make.
