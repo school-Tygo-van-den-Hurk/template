@@ -38,7 +38,7 @@ Look at the documentation for your IDE on how to work with devcontainers.
 First you want to set up the project. This means that:
 
 1. you wanna add the packages to the devShell in [`flake.nix`](flake.nix).
-1. next, you wanna add formatters to [treefmt](.config/treefmt.nix), and [pre-commit](.config/pre-commit.nix). See [the treefmt-nix repo](https://github.com/numtide/treefmt-nix), and the [the git-hooks.nix repo](https://github.com/cachix/git-hooks.nix) for more information on how, and the configuration options.
+1. next, you wanna add formatters to [treefmt](.config/treefmt.nix), and possibly checks to [pre-commit](.config/pre-commit.nix). See [the treefmt-nix repo](https://github.com/numtide/treefmt-nix), and the [the git-hooks.nix repo](https://github.com/cachix/git-hooks.nix) for more information on how, and the configuration options.
 1. Then you should add build scripts to build the packages. It is best practice to add the tests to the check phase.
 
 Only the first person needs to do this. After that, you'll have a repo that uses deterministic build environments, formatters, tests, and build checks. It will even be checked before push, and on every commit using pre-commit.
