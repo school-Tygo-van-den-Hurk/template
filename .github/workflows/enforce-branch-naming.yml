@@ -1,7 +1,7 @@
 name: Enforce branch naming
 
 on:
-  pull_request_target:
+  pull_request:
     types: [opened, synchronize, reopened]
     branches:
       - main
@@ -13,8 +13,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - run: |
-        ref="${{ github.ref }}"
-        branch="${ref#refs/heads/}"
+        branch="${{ github.head_ref }}"
 
         allowed_branch_names=$(\cat .github/labeler.yml | yq 'to_entries[]
           | .value
@@ -24,6 +23,7 @@ jobs:
           | .[]
           ')
 
+        echo "Looking for $branch"
         echo "Allowed branch names are: "
         echo "$allowed_branch_names"
         echo ""
