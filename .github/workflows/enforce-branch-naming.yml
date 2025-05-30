@@ -2,7 +2,7 @@ name: Enforce branch naming
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened]
     branches:
       - main
 
