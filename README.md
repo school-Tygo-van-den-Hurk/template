@@ -63,3 +63,6 @@ This is a repository that will function as a template for future school projects
 - ...
 
 To see how to start or develop see [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+> [!NOTE]
+> this pr will be rejected bc the branch has an invalid name.
