@@ -20,7 +20,3 @@ jobs:
         uses: DeterminateSystems/update-flake-lock@v25
         with:
           nix-options: --debug --log-format raw
-      - name: Auto-merge just created PR
-        run: gh pr merge ${{ steps.update.update-flake-lock.pull-request-number }} --merge --admin --delete-branch
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
