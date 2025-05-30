@@ -10,6 +10,7 @@ documentation:
   - head-branch:
     - '^documentation\/'
     - '^docs\/'
+    - '^doc\/'
 
 enhancement:
   - head-branch:
@@ -31,9 +32,15 @@ github_actions:
   - changed-files:
     - any-glob-to-any-file:
       - '.github/workflows/**'
+  - head-branch:
+    - '^ci\/'
+    - '^cicd\/'
+    - '^github_actions\/'
 
 bug:
   - head-branch:
     - '^fix\/'
     - '^fixes\/'
     - '^bug\/'
+    - '^bugfix\/'
+    
