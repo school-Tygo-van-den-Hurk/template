@@ -123,12 +123,17 @@ Development shell don't just add packages, they also set environment variables, 
 
 This repository uses branch naming conventions. Depending on what you're working on you should name your branch differently. Name it like one of these:
 
-- Name it `docs/*`, or `documentation/*` when working on documentation. Where `*` describes your branch. So for example: `docs/fix-typo`. Make sure to use [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
-- Name it `feat/*`, or `feature/*` when working on a feature. Where `*` describes your branch. So for example: `feat/add-macos-support`. Make sure to use [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
-- Name it `bug/*`, `fix/*`, or `fixes/*` when working on a bug fix. Where `*` describes your branch. So for example: `bug/fixes-memory-leak`. Make sure to use [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
-- Name it `deps/*`, or `dependencies/*` when updating dependencies. Where `*` describes your branch. So for example: `deps/update-xyz-from-v1.2.3-to-v4.5.6`. Make sure to use [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
+- Name it `docs/*`, or `documentation/*` when working on documentation.
+- Name it `feat/*`, or `feature/*` when working on a feature.
+- Name it `bug/*`, `fix/*`, or `fixes/*` when working on a bug fix.
+- Name it `deps/*`, or `dependencies/*` when updating dependencies.
 
-These branch names will make it clear what your working on, and allows the [CI/CD](#continuous-integration-and-continuous-delivery-cicd) to label your PR better.
+Where `*` describes your branch. So for example: `dependencies/update-xyz-from-v1.2.3-to-v4.5.6`. Make sure to use [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
+
+These branch names will make it clear what your working on, and allows the [CI/CD](#continuous-integration-and-continuous-delivery-cicd) to label your PR better. Failing to comply will result in failing CI checks as the CI checks if branches are named correctly.
+
+> [!NOTE]
+> For a most up to date list of what branches are allowed, go to [`.github/labeler.yml`](.github/labeler.yml), in there you can see a list of what "head-branches" are allowed and what they will be labeled.
 
 ## Continuous Integration and Continuous Delivery (CI/CD)
 
@@ -142,6 +147,7 @@ The most important thing is: the **Nix flake check**. These are the checks defin
 
 - Are the packages buildable?
 - Are the files properly formatted?
+- Is the branch names appropriately?
 - Are there any spelling mistakes?
 - Are you not committing binaries to the repo?
 - Are you committing private keys to the repository?
