@@ -5,6 +5,8 @@
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    nix-github-actions.url = "github:nix-community/nix-github-actions";
+
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     pre-commit-hooks = {
@@ -28,17 +30,24 @@
 
   outputs =
     inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    flake-parts.lib.mkFlake { inherit inputs; } rec {
 
       imports = [ ];
 
       systems = [
         "x86_64-linux"
-        "aarch64-darwin"
-        "x86_64-darwin"
       ];
 
-      flake = { };
+      flake = {
+        githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
+          checks = inputs.nixpkgs.lib.getAttrs systems (
+            # check whether the packages can be build for every platform,
+            # but for linux also do the other checks. Prevents duplicated
+            # checking for non-package builds.
+            inputs.self.packages // { inherit (inputs.self.checks) x86_64-linux; }
+          );
+        };
+      };
 
       perSystem =
         {
