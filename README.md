@@ -6,14 +6,14 @@
       <img src="https://img.shields.io/badge/Built_With-Nix-5277C3.svg?style=flat&logo=nixos&labelColor=73C3D5" alt="Built with Nix"/>
     </a>
     <a href="https://containers.dev/">
-      <img src="https://img.shields.io/badge/devcontainer-provided-green?style=flat" alt="devcontainer provided"/>
+      <img src="https://img.shields.io/badge/devcontainer-provided-dark_green?style=flat&logo=docker&logoColor=BEC5C9" alt="devcontainer provided"/>
     </a>
     <!--~ Repository CI/CD ~-->
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/deploy-github-pages.yml">
-      <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/deploy-github-pages/badge.svg?style=flat" alt="GitHub deployment status" />
+      <img src="https://img.shields.io/github/actions/workflow/status/school-Tygo-van-den-Hurk/template/deploy-github-pages.yml?style=flat&logo=GitHub%20Actions&logoColor=BEC5C9&label=Deploy" alt="GitHub Deployment status">
     </a>
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/nix-flake-check.yml">
-      <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/nix-flake-check/badge.svg?style=flat" alt="GitHub tests status" />
+      <img src="https://img.shields.io/github/actions/workflow/status/school-Tygo-van-den-Hurk/template/nix-flake-check.yml?style=flat&logo=GitHub%20Actions&logoColor=BEC5C9&label=CI/CD" alt="GitHub CI/CD status">
     </a>
     <!--~ Repository Statistics ~-->
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/graphs/contributors">
@@ -52,6 +52,13 @@
 
 # Template
 
+- [Template](#template)
+  - [Overview](#overview)
+  - [Credits](#credits)
+  - [Licence](#licence)
+
+## Overview
+
 This is a repository that will function as a template for future school projects.
 
 ## Credits
@@ -60,3 +67,7 @@ This is a repository that will function as a template for future school projects
 - ...
 
 To see how to start or develop see [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+## Licence
+
+All files within this repository fall under a licence. See [LICENCE](./LICENSE) for more information.
