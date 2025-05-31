@@ -1,4 +1,4 @@
-name: 'Welcome New Contributors'
+name: greet-new-contributors
 
 on:
   issues:

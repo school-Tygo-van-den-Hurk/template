@@ -1,4 +1,4 @@
-name: Deploy GitHub Pages
+name: deploy-github-pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -14,8 +14,8 @@ on:
         - "**/.jpeg"
         - "**/*.webp"
         - "**/*.html"
-        - "**/*.css" 
-  
+        - "**/*.css"
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
