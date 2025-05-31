@@ -1,4 +1,4 @@
-name: Nix Flake Checks
+name: nix-flake-check
 
 on:
   pull_request:
