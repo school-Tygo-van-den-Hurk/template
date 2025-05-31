@@ -10,13 +10,10 @@
     </a>
     <!--~ Repository CI/CD ~-->
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/deploy-github-pages.yml">
-      <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/Deploy%20GitHub%20Pages/badge.svg?style=flat" alt="GitHub deployment status" />
+      <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/deploy-github-pages/badge.svg?style=flat" alt="GitHub deployment status" />
     </a>
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/nix-flake-check.yml">
-      <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/Nix%20Flake%20Checks/badge.svg?style=flat" alt="GitHub tests status" />
-    </a>
-    <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/automerge-dependabot.yml">
-      <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/Automerge%20Dependabot/badge.svg?style=flat" alt="GitHub dependabot automerge status" />
+      <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/nix-flake-check/badge.svg?style=flat" alt="GitHub tests status" />
     </a>
     <!--~ Repository Statistics ~-->
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/graphs/contributors">

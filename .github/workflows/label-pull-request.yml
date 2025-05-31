@@ -1,4 +1,4 @@
-name: PR Labeler
+name: label-pull-request
 
 on:
   pull_request_target:
@@ -9,7 +9,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
-      
+
 jobs:
   labeler:
     runs-on: ubuntu-latest

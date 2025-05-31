@@ -1,9 +1,10 @@
-name: File naming conventions
+name: file-naming-conventions
 
 on:
   push:
     branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
   check-files:

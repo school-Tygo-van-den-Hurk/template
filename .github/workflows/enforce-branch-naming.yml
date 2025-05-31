@@ -1,5 +1,4 @@
-name: Enforce branch naming
-
+name: enforce-branch-naming
 on:
   pull_request:
     types: [opened]
