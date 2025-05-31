@@ -44,7 +44,7 @@
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/pulse">
       <img src="https://img.shields.io/github/created-at/school-Tygo-van-den-Hurk/template?style=flat" alt="created at badge" />
     </a>
-    <a href="https://github.com/school-Tygo-van-den-Hurk/template/release">
+    <a href="https://github.com/school-Tygo-van-den-Hurk/template/releases">
       <img src="https://img.shields.io/github/release/school-Tygo-van-den-Hurk/template?style=flat&display_name=release" alt="newest release" />
     </a>
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/">
