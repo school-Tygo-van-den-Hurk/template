@@ -122,6 +122,16 @@
       };
     };
 
+    # Ensures that a file is either empty, or ends with a single newline.
+    end-of-file-fixer = {
+      enable = true;
+      stages = [
+        "pre-push"
+        "pre-commit"
+        "manual"
+      ];
+    };
+
     # Checks markdown files for broken links, and bad syntax.
     mdformat = {
       enable = true;
