@@ -83,6 +83,7 @@
             buildInputs =
               pre-commit-check.enabledPackages
               ++ (with pkgs; [
+                git-cliff # generate release notes.
                 act # Run / check GitHub Actions locally.
                 git # Pull, commit, and push changes.
               ]);

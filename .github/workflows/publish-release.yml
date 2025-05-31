@@ -9,12 +9,16 @@ permissions:
   contents: write
 
 jobs:
-  publish:
+  
+  publish-release:
+    name: Publish Release
     runs-on: ubuntu-latest
     steps:
 
       - name: Checkout code
         uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
 
       - name: Install Nix
         uses: cachix/install-nix-action@v30
@@ -44,24 +48,34 @@ jobs:
             rm -rf result
           done
 
-      - name: Create release
-        uses: release-drafter/release-drafter@v6.1.0
+      - name: Generate a changelog
+        uses: orhun/git-cliff-action@v3
+        id: git-cliff
         with:
-          publish: true
-          tag: ${{ github.ref_name }}
+          config: .config/changelog.toml
+          args: --verbose
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OUTPUT: CHANGELOG.md
+          GITHUB_REPO: ${{ github.repository }}
 
-      - name: Upload Release Asset
-        id: upload-release-asset
+      - name: Print the changelog
+        run: cat "${{ steps.git-cliff.outputs.changelog }}"
+
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2.2.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          files: 'artifacts/**/*.{tar.gz,pdf}'
           fail_on_unmatched_files: true
-          # globs to files you want to upload:
-          # artifacts/**/*.pdf
-          # artifacts/**/*.stl
-          files: 'artifacts/**/*.tar.gz' # always created for each package in the flake
-          # Do not change the body
-          append_body: true
-          body: ''
+          body: ${{ steps.git-cliff.outputs.content }}
+
+      - name: Commit changelog
+        run: |
+          branch="main"
+          git checkout $branch
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          set +e
+          git add CHANGELOG.md
+          git commit --message "docs(changelog): Update changelog"
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git $branch
