@@ -62,6 +62,14 @@
       ];
     };
 
+    # Check whether the current commit message follows committing rules.
+    convco = {
+      enable = true;
+      stages = [
+        "commit-msg"
+      ];
+    };
+
     # disallows commits to certain branches.
     no-commit-to-branch = {
       enable = true;
