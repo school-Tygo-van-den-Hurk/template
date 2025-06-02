@@ -23,6 +23,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           nix-options: --debug --log-format raw
+          branch: deps/update-flake-lock-file
           commit-msg: &commit-msg 'deps(nix): Updated nix dependencies'
           pr-title: *commit-msg
           pr-labels: 'dependencies'
