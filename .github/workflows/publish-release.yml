@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  
+
   publish-release:
     name: Publish Release
     runs-on: ubuntu-latest
@@ -65,14 +65,14 @@ jobs:
         uses: softprops/action-gh-release@v2.2.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          files: 'artifacts/**/*.{tar.gz,pdf}'
+          files: 'artifacts/**/*.tar.gz'
           fail_on_unmatched_files: true
           body: ${{ steps.git-cliff.outputs.content }}
 
       - name: Commit changelog
         run: |
           branch="main"
-          git checkout $branch
+          git switch $branch 2>/dev/null || git switch -c $branch
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           set +e

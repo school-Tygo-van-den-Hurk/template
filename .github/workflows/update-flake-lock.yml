@@ -19,4 +19,8 @@ jobs:
         id: update-flake-lock
         uses: DeterminateSystems/update-flake-lock@v25
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           nix-options: --debug --log-format raw
+          commit-msg: &commit-msg 'deps(nix): Updated nix dependencies'
+          pr-title: *commit-msg
+          pr-labels: 'dependencies'
