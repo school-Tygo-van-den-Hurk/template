@@ -29,6 +29,7 @@
     - [Devcontainers](#devcontainers)
   - [Commit Message Conventions](#commit-message-conventions)
   - [Branch Naming Conventions](#branch-naming-conventions)
+  - [PR Titles](#pr-titles)
   - [Testing](#testing)
     - [Pre-commit hooks](#pre-commit-hooks)
     - [Continuous Integration and Continuous Delivery (CI/CD)](#continuous-integration-and-continuous-delivery-cicd)
@@ -39,7 +40,7 @@
 
 **First of all, thank you for considering contributing to the project!**
 
-We use [Nix](https://nixos.org) for this project as it ensures that we are all using the same tools. Please make sure you have nix version 2.16.0 or higher and have the nix-command and flakes experimental options enabled.
+We use [Nix](https://nixos.org) for this project as it ensures that we are all using the same tools. Please make sure you have nix version 2.16.0 or higher and have the `nix-command` and `flakes` experimental options enabled.
 
 ### Devcontainers
 
@@ -47,7 +48,7 @@ if you don't have nix installed and can't install it for whatever reason then th
 
 ## Commit Message Conventions
 
-All commit messages must follow the [conventional commit specification](https://www.conventionalcommits.org/en/v1.0.0/#specification). This is to autogenerate the changelog and keep commits constant. There are pre-commit checks to help you not push wrongly formed commits by mistake.
+All commit messages must follow the [conventional commit specification](https://www.conventionalcommits.org/en/v1.0.0/#specification). This is to autogenerate the changelog and keep commits constant. There are pre-commit checks and CI/CD checks to help you not push wrongly formed commits by mistake.
 
 ## Branch Naming Conventions
 
@@ -58,12 +59,24 @@ Much like conventional commits we use conventional branch naming. This means tha
 - Name it `bug/*`, `fix/*`, `bugfix`, or `fixes/*` when working on a bug fix.
 - Name it `deps/*`, or `dependencies/*` when updating dependencies.
 
-Where `*` describes your branch. So for example: `dependencies/update-xyz-from-v1.2.3-to-v4.5.6`. Make sure to use [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
-
-These branch names will make it clear what your working on, and allows the [CI/CD](#continuous-integration-and-continuous-delivery-cicd) to label your PR better.
+Where `*` describes your branch. So for example: `deps/update-xyz-from-v1.2.3-to-v4.5.6`. Make sure to use [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case). These branch names will make it clear what your working on, and allows the [CI/CD](#continuous-integration-and-continuous-delivery-cicd) to label your PR better.
 
 > [!NOTE]
 > For a most up to date list of what branch names are used, go to [`.github/labeler.yml`](.github/labeler.yml), in there you can see a list of what "head-branches" are allowed and what they will be labeled.
+
+You can use whatever prefix you seem best describes the changes. The options you can chose from are the same as the conventional commit prefixes.
+
+## PR Titles
+
+As for pull request titles we use the same as style as conventional commits. So a PR should be names something like:
+
+```
+feat: some new feature
+deps(flake): Updated NixPkgs
+ci: Reduced runtime 
+```
+
+This allows for labeling the PRs more efficiently using CI/CI and our own eyes. As well as keeping a valid log even when squashing. As for the type, message, or scope: this can be whatever you seem most appropriate.
 
 ## Testing
 
