@@ -2,6 +2,9 @@
 
 <br>
 <div align="center">
+    <a href="https://containers.dev/">
+      <img src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=flat&logoColor=BEC5C9" alt="Code of Conduct"/>
+    </a>
     <a href="https://nixos.org">
       <img src="https://img.shields.io/badge/Built_With-Nix-5277C3.svg?style=flat&logo=nixos&labelColor=73C3D5" alt="Built with Nix"/>
     </a>
