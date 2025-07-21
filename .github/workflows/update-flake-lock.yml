@@ -19,7 +19,7 @@ jobs:
         uses: DeterminateSystems/determinate-nix-action@v3
       - name: Update flake.lock
         id: update-flake-lock
-        uses: DeterminateSystems/update-flake-lock@v25
+        uses: DeterminateSystems/update-flake-lock@v27
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           nix-options: --debug --log-format raw
