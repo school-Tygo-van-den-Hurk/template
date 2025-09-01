@@ -63,11 +63,12 @@ pkgs: {
     };
 
     # Check whether the current commit message follows committing rules.
-    convco-check-commit-message = let
+    convco-check-commit-message =
+      let
 
-      name = "convco-check-commit-message";
-      config = builtins.toFile "config.json" (builtins.toJSON (import ./convco.nix));
-      custom-package = pkgs.writeShellScriptBin name ''
+        name = "convco-check-commit-message";
+        config = builtins.toFile "config.json" (builtins.toJSON (import ./convco.nix));
+        custom-package = pkgs.writeShellScriptBin name ''
           set -e
           for arg in "$@"; do
             if [ -f "$arg" ]; then
@@ -79,33 +80,36 @@ pkgs: {
           done
         '';
 
-    in rec {
-      inherit name;
-      enable = true;
-      stages = [ "commit-msg" ];
-      entry = "${custom-package}/bin/${name}";
-      extraPackages = [ custom-package ];
-    };
+      in
+      rec {
+        inherit name;
+        enable = true;
+        stages = [ "commit-msg" ];
+        entry = "${custom-package}/bin/${name}";
+        extraPackages = [ custom-package ];
+      };
 
-    convco-check-history = let
+    convco-check-history =
+      let
 
-      name = "convco-check-commit-message";
-      config = builtins.toFile "config.json" (builtins.toJSON (import ./convco.nix));
-      custom-package = pkgs.writeShellScriptBin name ''
+        name = "convco-check-commit-message";
+        config = builtins.toFile "config.json" (builtins.toJSON (import ./convco.nix));
+        custom-package = pkgs.writeShellScriptBin name ''
           set -e
           ${pkgs.convco}/bin/convco --config ${config} check
         '';
 
-    in rec {
-      inherit name;
-      enable = true;
-      entry = "${custom-package}/bin/${name}";
-      extraPackages = [ custom-package ];
-      stages = [
-        "pre-push"
-        "manual"
-      ];
-    };
+      in
+      rec {
+        inherit name;
+        enable = true;
+        entry = "${custom-package}/bin/${name}";
+        extraPackages = [ custom-package ];
+        stages = [
+          "pre-push"
+          "manual"
+        ];
+      };
 
     # disallows commits to certain branches.
     no-commit-to-branch = {
