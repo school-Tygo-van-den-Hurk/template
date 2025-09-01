@@ -13,6 +13,16 @@ indent_style = space
 trim_trailing_whitespace = true
 indent_size = 4
 
+
+#| Shell scripts – 2-space is typical
+
+[*.sh]
+indent_size = 2
+
+[*.bash]
+indent_size = 2
+
+
 #| Markdown – 2-space is typical and trailing whitespace must be kept
 
 [*.md]
