@@ -30,6 +30,9 @@
 
   outputs =
     inputs@{ flake-parts, ... }:
+    let
+      overlays = import ./nix/overlays inputs;
+    in
     flake-parts.lib.mkFlake { inherit inputs; } rec {
 
       imports = [ ];
@@ -39,6 +42,7 @@
       ];
 
       flake = {
+        inherit overlays;
         githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
           checks = inputs.nixpkgs.lib.getAttrs systems (
             # check whether the packages can be build for every platform,
@@ -52,31 +56,35 @@
       perSystem =
         {
           config,
-          pkgs,
           system,
           ...
         }:
         let
 
+          pkgs = import inputs.nixpkgs {
+            overlays = builtins.attrValues overlays;
+            inherit system;
+          };
+
           inherit (inputs) treefmt-nix pre-commit-hooks;
 
           treefmtEval = treefmt-nix.lib.evalModule pkgs ./.config/treefmt.nix;
-          pre-commit-check = pre-commit-hooks.lib.${system}.run (import ./.config/pre-commit.nix);
+          pre-commit-check = pre-commit-hooks.lib.${system}.run (import ./.config/pre-commit.nix pkgs);
 
         in
         rec {
-          # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Flake Check ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+          # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Flake Check ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
           checks = packages // {
             formatting = treefmtEval.config.build.check inputs.self;
             inherit pre-commit-check;
           };
 
-          # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Fmt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+          # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Fmt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
           formatter = treefmtEval.config.build.wrapper;
 
-          # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Develop ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+          # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Develop ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
           devShells.default = pkgs.mkShell {
             inherit (pre-commit-check) shellHook;
@@ -88,40 +96,23 @@
               ]);
           };
 
-          # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Build ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+          # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Run ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
-          packages.default = pkgs.stdenv.mkDerivation rec {
-            name = "default";
-            src = ./.;
-            buildInputs = with pkgs; [ ];
+          apps =
+            let
+              scripts = import ./nix/scripts pkgs;
+            in
+            builtins.mapAttrs (name: script: {
+              type = "app";
+              program = "${builtins.toString script}/bin/${name}";
+              inherit (script) meta;
+            }) scripts;
 
-            buildPhase = ''
-              runHook preBuild
+          # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Nix Build ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
-              # ...
+          packages = import ./nix/packages pkgs;
 
-              runHook postBuild
-            '';
-
-            checkPhase = ''
-              runHook preCheck
-
-              # ...
-
-              runHook postCheck
-            '';
-
-            installPhase = ''
-              runHook preInstall
-
-              mkdir --parents $out
-              # ...
-
-              runHook postInstall
-            '';
-          };
-
-          # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+          # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
         };
     };
 }

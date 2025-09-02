@@ -47,7 +47,20 @@ if you don't have nix installed and can't install it for whatever reason then th
 
 ## Commit Message Conventions
 
-All commit messages must follow the [conventional commit specification](https://www.conventionalcommits.org/en/v1.0.0/#specification). This is to autogenerate the changelog and keep commits constant. There are pre-commit checks to help you not push wrongly formed commits by mistake.
+All commit messages must follow the [conventional commit specification](https://www.conventionalcommits.org/en/v1.0.0/#specification). This is to autogenerate the changelog and keep commits constant. There are pre-commit checks to help you not push wrongly formed commits by mistake. Here is a list of allowed types:
+
+- **feat**: For new features.
+- **fix**: For bug fixes.
+- **test**: For changes to tests.
+- **docs**: For changes to the documentation.
+- **deps**: For changes in dependencies.
+- **ci**: For changes to the CI workflows.
+- **refactor**: A code change that neither fixes a bug nor adds a feature.
+- **perf**: A code change that improves performance.
+- **style**: Changes that do not affect the meaning of the code (formatting).
+- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm).
+- **chore**: Other changes that don't modify source or test files.
+- **revert**: Reverts a previous commit.
 
 ## Branch Naming Conventions
 
