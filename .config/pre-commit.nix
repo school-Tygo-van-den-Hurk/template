@@ -1,5 +1,5 @@
 # See https://github.com/cachix/git-hooks.nix/blob/fa466640195d38ec97cf0493d6d6882bc4d14969/modules/hooks.nix
-{
+pkgs: {
   src = ./..;
   hooks = {
 
@@ -63,12 +63,53 @@
     };
 
     # Check whether the current commit message follows committing rules.
-    convco = {
-      enable = true;
-      stages = [
-        "commit-msg"
-      ];
-    };
+    convco-check-commit-message =
+      let
+
+        name = "convco-check-commit-message";
+        config = builtins.toFile "config.json" (builtins.toJSON (import ./convco.nix));
+        custom-package = pkgs.writeShellScriptBin name ''
+          set -e
+          for arg in "$@"; do
+            if [ -f "$arg" ]; then
+              cat "$arg" | ${pkgs.convco}/bin/convco --config ${config} check --from-stdin
+            else
+              echo "No such file or directory: '$arg'" >&2
+              exit 1
+            fi
+          done
+        '';
+
+      in
+      rec {
+        inherit name;
+        enable = true;
+        stages = [ "commit-msg" ];
+        entry = "${custom-package}/bin/${name}";
+        extraPackages = [ custom-package ];
+      };
+
+    convco-check-history =
+      let
+
+        name = "convco-check-commit-message";
+        config = builtins.toFile "config.json" (builtins.toJSON (import ./convco.nix));
+        custom-package = pkgs.writeShellScriptBin name ''
+          set -e
+          ${pkgs.convco}/bin/convco --config ${config} check
+        '';
+
+      in
+      rec {
+        inherit name;
+        enable = true;
+        entry = "${custom-package}/bin/${name}";
+        extraPackages = [ custom-package ];
+        stages = [
+          "pre-push"
+          "manual"
+        ];
+      };
 
     # disallows commits to certain branches.
     no-commit-to-branch = {
@@ -113,6 +154,7 @@
       settings = {
         no-unicode = true;
         hidden = true;
+        exclude = "changelog.md";
         ignored-words = [
           "Tygo"
           "tygo"
@@ -165,4 +207,10 @@
     #   ];
     # };
   };
+
+  # settings = {
+  #   excludes = [
+  #     "**/changelog.md"
+  #   ];
+  # };
 }
