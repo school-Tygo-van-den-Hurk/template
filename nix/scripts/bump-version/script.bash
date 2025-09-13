@@ -69,7 +69,6 @@ while [[ $# -gt 0 ]]; do
     exit 0
     ;;
   -t | --to)
-    ignore_changes=1
     NEW_VERSION="$2"
     shift 2
     ;;
