@@ -2,13 +2,13 @@
 
 [< Back to scripts overview](../readme.md)
 
-# Preview
+# bump-version
 
-- [Preview](#preview)
+- [bump-version](#bump-version)
   - [Overview](#overview)
 
 ## Overview
 
-`preview` is a cli tool that allows you to preview a file in your terminal without opening it. For example, when passed a directory it will show you the files in a directory. if provided with a text file then it will show you the text file including possibly syntax highlighting, and if it is an image or PDF then it will show either an image or ascii art that shows the contents of the file.
+`bump-version` is a CLI tool that automates the process of incrementing version numbers in this project. What it does under the hood is scan the git history, and then generate a changelog based on that.
 
-allowing you to run `preview file` for any file and see what that would look like rendered and all.
+Run `bump-version --help` for more information about the command.
