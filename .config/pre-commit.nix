@@ -185,6 +185,21 @@ pkgs: {
       ];
     };
 
+    nix-fmt =
+      let
+        nix-command = "--extra-experimental-features nix-command";
+        flakes = "--extra-experimental-features flakes";
+      in
+      {
+        enable = true;
+        name = "nix-fmt";
+        entry = "${pkgs.nix}/bin/nix ${nix-command} ${flakes} --offline fmt";
+        pass_filenames = true;
+        stages = [
+          "pre-commit"
+        ];
+      };
+
     #! Requires an internet connection while in sandbox, thus does not work.
     # # Checks for broken links in Markdown files.
     # lychee = {
