@@ -16,6 +16,11 @@ let
       return "$?"
     }
 
+    sed() {
+      ${gnused}/bin/sed "$@"
+      return "$?"
+    }
+
     ${builtins.readFile ./script.bash}
   '';
 in
@@ -23,6 +28,8 @@ in
 stdenv.mkDerivation rec {
   inherit name;
   src = ./.;
+
+  inherit script;
 
   buildPhase = ''
     runHook preBuild
