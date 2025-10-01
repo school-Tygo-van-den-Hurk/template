@@ -35,22 +35,22 @@ ignore_changes=0
 NEW_VERSION=${NEW_VERSION:-""}
 
 print_usage() {
-  echo "Usage: $(basename "$0") [options]"
+  echo "Usage: $(basename "$0") [options]                                               "
   echo "                                                                                "
-  echo "  -h, --help:            Print this help message."
-  echo ""
-  echo "  -v, --verbose:         Print extra information. Cannot be combined with"
-  echo "                         '--quiet'. Exits with exit code 2 if combined."
-  echo ""
-  echo "  -q, --quiet:           Print less information. Cannot be combined with"
-  echo "                         '--verbose'. Exits with exit code 2 if combined."
-  echo ""
-  echo "  -i, --ignore-changes:  Do not fail if the working tree is dirty"
-  echo ""
-  echo "  -t, --to:              The version to bump to. If left blank is determined"
-  echo "                         automatically. Can also be set using the 'NEW_VERSION'"
-  echo "                         environment variable."
-  echo ""
+  echo "  -h, --help:            Print this help message.                               "
+  echo "                                                                                "
+  echo "  -v, --verbose:         Print extra information. Cannot be combined with       "
+  echo "                         '--quiet'. Exits with exit code 2 if combined.         "
+  echo "                                                                                "
+  echo "  -q, --quiet:           Print less information. Cannot be combined with        "
+  echo "                         '--verbose'. Exits with exit code 2 if combined.       "
+  echo "                                                                                "
+  echo "  -i, --ignore-changes:  Do not fail if the working tree is dirty               "
+  echo "                                                                                "
+  echo "  -t, --to:              The version to bump to. If left blank is determined    "
+  echo "                         automatically. Can also be set using the 'NEW_VERSION' "
+  echo "                         environment variable.                                  "
+  echo "                                                                                "
 }
 
 # Loop through arguments
@@ -126,7 +126,7 @@ fi
 verbose_print "NEW_VERSION: $NEW_VERSION"
 
 print "Updating changelog..."
-convco --config "$CONFIG" changelog --unreleased "$NEW_VERSION" --output "$CHANGELOG"
+convco --config "$CONFIG" changelog --unreleased "$NEW_VERSION" | sed 's/^\* /- /' > "$CHANGELOG"
 print "Changelog updated!"
 
 print "Committing changes..."
