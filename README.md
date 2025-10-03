@@ -2,6 +2,9 @@
 
 <br>
 <div align="center">
+    <a href="https://github.com/codespaces/new?repo=school-Tygo-van-den-Hurk/template">
+      <img src="https://img.shields.io/badge/_-Open_in_GitHub_CodeSpace-2F363D.svg?labelColor=24292E&style=flat&logo=GitHub" alt="open in CodeSpaces"/>
+    </a>
     <a href="https://nixos.org">
       <img src="https://img.shields.io/badge/Built_With-Nix-5277C3.svg?style=flat&logo=nixos&labelColor=73C3D5" alt="Built with Nix"/>
     </a>
