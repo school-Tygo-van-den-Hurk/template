@@ -2,21 +2,47 @@ name: update-flake-lock
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * 0'
+  schedule: [cron: '0 0 * * 0']
 
 jobs:
-  update-flake-lock:
+
+  nix-flake-update:
+    permissions:
+      contents: write
+      id-token: write
+      issues: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Get date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+      - name: Checkout the repository
         uses: actions/checkout@v4
-      - name: Install nix
-        uses: cachix/install-nix-action@v30
-      - name: Install Determinate Nix
-        uses: DeterminateSystems/determinate-nix-action@v3
-      - name: Update flake.lock
-        id: update-flake-lock
-        uses: DeterminateSystems/update-flake-lock@v25
+      - name: Install nix using Determinate Systems
+        uses: DeterminateSystems/determinate-nix-action@v3.11.2
+      - name: Update flake inputs and create Pull Request
+        uses: DeterminateSystems/update-flake-lock@v27
+        id: update-nix-flake
         with:
-          nix-options: --debug --log-format raw
+          branch: deps/update-nix-flake-lock-pr/${{ github.run_id }}/${{ steps.date.outputs.date }}
+          nix-options: "--debug --log-format raw"
+          git-author-name: "GitHub Actions"
+          git-author-email: "github-actions[bot]@users.noreply.github.com"
+          git-committer-name: "GitHub Actions"
+          git-committer-email: "github-actions[bot]@users.noreply.github.com"
+          pr-assignees: "Tygo-van-den-Hurk"
+          pr-reviewers: "Tygo-van-den-Hurk"
+          pr-title: "deps: updated Nix flake inputs"
+          pr-labels: "dependencies"
+          commit-msg: |
+            deps: updated Nix flake inputs
+
+            This is an automated commit to keep the flake inputs up to date. Why is it
+            important to keep Nix dependencies up to date you may ask? Nixpkgs receives a
+            continuous stream of security patches to keep your software and systems secure.
+            Using outdated revisions of Nixpkgs can inadvertently expose you to software
+            security risks that have been resolved in more recent releases. That is why we
+            use the unstable branch, and update it regularly.
+      - name: Print PR number
+        run: echo Pull request number is ${{ steps.update-nix-flake.outputs.pull-request-number }}.
