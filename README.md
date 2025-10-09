@@ -2,6 +2,7 @@
 
 <br>
 <div align="center">
+    <!--~ Technologies ~-->
     <a href="https://github.com/codespaces/new?repo=school-Tygo-van-den-Hurk/template">
       <img src="https://img.shields.io/badge/_-Open_in_GitHub_CodeSpace-2F363D.svg?labelColor=24292E&style=flat&logo=GitHub&logoColor=959DA5" alt="open in CodeSpaces"/>
     </a>
@@ -17,6 +18,16 @@
     </a>
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/nix-flake-check.yml">
       <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/Nix%20Flake%20Checks/badge.svg?style=flat" alt="GitHub tests status" />
+    </a>
+    <!-- Standards -->
+      <a href="https://www.conventionalcommits.org/en/v1.0.0/">
+	    <img alt="Conventional Commits: 1.0.0" src="https://img.shields.io/badge/Conventional_Commits-1.0.0-FA6673?logo=conventional-commits&logoColor=FA6673&style=flat">
+    </a>  
+    <a href="https://semver.org/">
+	    <img alt="Semantic Versioning: 2.0.0" src="https://img.shields.io/badge/Semantic_Versioning-2.0.0-a05f79?logo=semantic-release&logoColor=f97ff0&style=flat">
+    </a>
+    <a href="https://www.contributor-covenant.org/version/3/0/code_of_conduct/">
+	    <img alt="Contributor covenant: 3.0" src="https://img.shields.io/badge/Contributor_Covenant-3.0-5E2751.svg?logo=contributor-covenant&logoColor=5E2751&style=flat">
     </a>
     <!-- Open issues and PRs -->
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/issues?q=is%3Aissue%20state%3Aopen%20label%3Abug">
