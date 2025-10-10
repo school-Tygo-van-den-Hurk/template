@@ -16,7 +16,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Label Pull Request
-      uses: actions/labeler@v5
+      uses: actions/labeler@v6
       with:
         sync-labels: true
         repo-token: ${{ secrets.GITHUB_TOKEN }}
