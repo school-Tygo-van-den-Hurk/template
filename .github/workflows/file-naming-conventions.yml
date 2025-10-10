@@ -22,15 +22,16 @@ jobs:
             -name README.md -prune -o \
             -path ./vendor -prune -o \
             -path ./CONTRIBUTING.md -prune -o \
+            -path ./CODE_OF_CONDUCT.md -prune -o \
             -path ./.github/CODEOWNERS -prune -o \
             -path ./LICENSE -prune -o \
-            -type f -print | grep -E '[A-Z ]+' || true)
+            -type f -print | grep -E '.+\.[A-Z ]+' || true)
           if [ -n "$matches" ]; then
             echo "ERROR: Found files That do not respect naming convention:"
             echo ""
             echo "$matches"
             echo ""
-            echo "Please rename the files to only use kebab or snake case."
+            echo "Please rename the files to only use lower case extensions."
             exit 1
           else
             echo "All files respect naming convention."
