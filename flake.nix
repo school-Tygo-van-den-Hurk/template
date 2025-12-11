@@ -55,7 +55,6 @@
 
       perSystem =
         {
-          config,
           system,
           ...
         }:
