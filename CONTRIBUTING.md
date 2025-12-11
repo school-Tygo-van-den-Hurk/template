@@ -8,17 +8,16 @@
 >
 > - [ ] Enable GitHub pages or remove the `deploy-github-pages` workflow.
 > - [ ] First up you wanna name and describe the repository.
->   - [ ] Change the description of the flake.
->   - [ ] Change oneliner description at the top of the README.
->   - [ ] Add an overview paragraph to the README describing it in longer form.
->   - [ ] Copy this description over to the repository description.
+>   - [ ] find and replace `school-Tygo-van-den-Hurk/template` with the current `$user/$repo` in the entire code base.
+>   - [ ] Change the description of the flake and the oneliner description at the top of the README.
+>   - [ ] Add an overview paragraph to the README describing it in longer form copy this to the repo description.
 > - [ ] you wanna add the packages to the devShell in [`flake.nix`](flake.nix).
-> - [ ] next, you wanna add formatters to [treefmt](.config/treefmt.nix). See [the treefmt-nix repo](https://github.com/numtide/treefmt-nix) for more information on how, and the configuration options.
-> - [ ] You can possibly checks to [pre-commit](.config/pre-commit.nix). See [the git-hooks.nix repo](https://github.com/cachix/git-hooks.nix) for more information on how, and the configuration options.
+> - [ ] next, you wanna add formatters to [treefmt](nix/config/treefmt.nix). See [the treefmt-nix repo](https://github.com/numtide/treefmt-nix) for more information on how, and the configuration options.
+> - [ ] You can possibly checks to [pre-commit](nix/config/pre-commit.nix). See [the git-hooks.nix repo](https://github.com/cachix/git-hooks.nix) for more information on how, and the configuration options.
 > - [ ] Initialize whatever template the programming language or tooling uses.
 > - [ ] Then you should add build scripts to build the packages you just initialised. It is best practice to add the tests to the check phase.
-> - [ ] Commit what you just created to see if everything is checked properly.
 > - [ ] Delete this section.
+> - [ ] Commit what you just created to see if everything is checked properly. (amend the init commit and force push)
 >
 > Only the first person needs to do this. After that, you'll have a repo that uses deterministic build environments, formatters, tests, and build checks. It will even be checked before push, and on every commit using pre-commit.
 
@@ -37,13 +36,13 @@
 
 ## Overview
 
-**First of all, thank you for considering contributing to the project!**
-
-We use [Nix](https://nixos.org) for this project as it ensures that we are all using the same tools. Please make sure you have nix version 2.16.0 or higher and have the nix-command and flakes experimental options enabled.
+**First of all, thank you for considering contributing to the project!** To ensure that your Pull Request gets merged, please follow the guidelines described in this document.
 
 ### Devcontainers
 
-if you don't have nix installed and can't install it for whatever reason then there is a devcontainer you can use. When you enter a devcontainer it might take a while to pull the required image and set it all up. This will be faster after the first initial setup. Look at the documentation for your IDE on how to work with devcontainers.
+We use [Nix](https://nixos.org) for this project as it ensures that we are all using the same tools. Please make sure you have nix version 2.16.0 or higher and have the nix-command and flakes experimental options enabled.
+
+If you don't have nix installed and can't install it for whatever reason then there is a devcontainer you can use. When you enter a devcontainer it might take a while to pull the required image and set it all up. This will be faster after the first initial setup. Look at the documentation for your IDE on how to work with devcontainers.
 
 ## Commit Message Conventions
 
@@ -92,7 +91,7 @@ This will test the entire repository, including building, testing, formatting et
 
 ### Pre-commit hooks
 
-As mentioned before we use pre-commit hooks. These run on commit or on push, they allow you to make sure that you're not adding typos, broken symlinks, binaries, and a bunch of other things. These pre-commit hooks have to be 'installed' This happens when you enter a development shell using `nix develop`. This install needs to be done the first time you enter the repo, and every time `.config/pre-commit.nix` is changed.
+As mentioned before we use pre-commit hooks. These run on commit or on push, they allow you to make sure that you're not adding typos, broken symlinks, binaries, and a bunch of other things. These pre-commit hooks have to be 'installed' This happens when you enter a development shell using `nix develop`. This install needs to be done the first time you enter the repo, and every time `nix/config/pre-commit.nix` is changed.
 
 So make sure to run:
 

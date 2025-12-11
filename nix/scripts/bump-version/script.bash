@@ -112,7 +112,7 @@ if [[ $verbose -eq 1 ]]; then
 fi
 
 ROOT=$(git rev-parse --show-toplevel)
-NIX_EXPRESSION="builtins.toFile \"config.json\" (builtins.toJSON (import $ROOT/.config/convco.nix))"
+NIX_EXPRESSION="builtins.toFile \"config.json\" (builtins.toJSON (import $ROOT/nix/config/convco.nix))"
 CONFIG=$(nix eval --expr "$NIX_EXPRESSION" --impure)
 CHANGELOG="$ROOT/changelog.md"
 

@@ -68,8 +68,8 @@
 
           inherit (inputs) treefmt-nix pre-commit-hooks;
 
-          treefmtEval = treefmt-nix.lib.evalModule pkgs ./.config/treefmt.nix;
-          pre-commit-check = pre-commit-hooks.lib.${system}.run (import ./.config/pre-commit.nix pkgs);
+          treefmtEval = treefmt-nix.lib.evalModule pkgs ./nix/config/treefmt.nix;
+          pre-commit-check = pre-commit-hooks.lib.${system}.run (import ./nix/config/pre-commit.nix pkgs);
 
         in
         rec {
