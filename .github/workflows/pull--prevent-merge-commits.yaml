@@ -4,8 +4,6 @@ name: Prevent merge commits
 # readable.
 
 on:
-  push:
-    branches: [main, master, release, development]
   pull_request:
     branches: [main, master, release, development]
     types: [opened, synchronize, reopened]
