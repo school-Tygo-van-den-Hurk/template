@@ -1,4 +1,12 @@
 # ~~~ CODE OWNERS ~~~ #
 
-# All nix files are owned by Tygo-van-den-Hurk
+# All files owned by Tygo-van-den-Hurk
 **/*.nix @Tygo-van-den-Hurk
+**/nix/**/* @Tygo-van-den-Hurk
+**/.github/**/* @Tygo-van-den-Hurk
+**/.vscode/**/* @Tygo-van-den-Hurk
+**/.devcontainer/**/* @Tygo-van-den-Hurk
+**/LICENCE* @Tygo-van-den-Hurk
+**/README.md @Tygo-van-den-Hurk
+**/CODE_OF_CONDUCT.md @Tygo-van-den-Hurk
+**/CONTRIBUTING.md @Tygo-van-den-Hurk
