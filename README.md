@@ -30,11 +30,11 @@
 	    <img alt="Contributor covenant: 3.0" src="https://img.shields.io/badge/Contributor_Covenant-3.0-5E2751.svg?logo=contributor-covenant&logoColor=5E2751&style=flat">
     </a>
     <!-- Open issues and PRs -->
-    <a href="https://github.com/school-Tygo-van-den-Hurk/template/issues?q=is%3Aissue%20state%3Aopen%20label%3Abug">
-      <img src="https://img.shields.io/github/issues/school-Tygo-van-den-Hurk/template/bug?label=bug%20reports" alt="GitHub open bug reports"/>
+    <a href="https://github.com/school-Tygo-van-den-Hurk/template/issues?q=is%3Aissue%20state%3Aopen%20label%3Afix">
+      <img src="https://img.shields.io/github/issues/school-Tygo-van-den-Hurk/template/fix?label=Open%20bug%20reports" alt="GitHub open bug reports"/>
     </a>
-    <a href="https://github.com/school-Tygo-van-den-Hurk/template/issues?q=is%3Aissue%20state%3Aopen%20label%3Aenhancement">
-      <img src="https://img.shields.io/github/issues/school-Tygo-van-den-Hurk/template/enhancement?label=feature%20requests" alt="GitHub open feature requests"/>
+    <a href="https://github.com/school-Tygo-van-den-Hurk/template/issues?q=is%3Aissue%20state%3Aopen%20label%3Afeat">
+      <img src="https://img.shields.io/github/issues/school-Tygo-van-den-Hurk/template/feat?label=Open%20feature%20requests" alt="GitHub open feature requests"/>
     </a>
     <!--~ Repository Statistics ~-->
     <a href="https://github.com/school-Tygo-van-den-Hurk/template/graphs/contributors">
