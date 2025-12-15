@@ -22,7 +22,7 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4.3.0
       - name: Install nix using Determinate Systems
-        uses: DeterminateSystems/determinate-nix-action@v3.11.3
+        uses: DeterminateSystems/determinate-nix-action@v3.14.0
       - name: Update flake inputs and create Pull Request
         uses: DeterminateSystems/update-flake-lock@v27
         id: update-nix-flake
