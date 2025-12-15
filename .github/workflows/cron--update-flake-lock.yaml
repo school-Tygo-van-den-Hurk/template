@@ -1,4 +1,6 @@
-name: update-flake-lock
+name: Update Nix Flake Lock File
+# Periodically updates the flake.lock file at the root of the repository to keep it's inputs up to date. Preventing
+# security vulnerabilities.
 
 on:
   workflow_dispatch:
@@ -18,7 +20,7 @@ jobs:
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
       - name: Checkout the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.3.0
       - name: Install nix using Determinate Systems
         uses: DeterminateSystems/determinate-nix-action@v3.11.3
       - name: Update flake inputs and create Pull Request
@@ -38,11 +40,12 @@ jobs:
           commit-msg: |
             deps: updated Nix flake inputs
 
-            This is an automated commit to keep the flake inputs up to date. Why is it
-            important to keep Nix dependencies up to date you may ask? Nixpkgs receives a
-            continuous stream of security patches to keep your software and systems secure.
-            Using outdated revisions of Nixpkgs can inadvertently expose you to software
-            security risks that have been resolved in more recent releases. That is why we
+            This is an automated commit to keep the flake inputs up to date.
+            Why is it important to keep Nix dependencies up to date you may
+            ask? Nixpkgs receives a continuous stream of security patches to
+            keep your software and systems secure. Using outdated revisions of
+            Nixpkgs can inadvertently expose you to software security risks
+            that have been resolved in more recent releases. That is why we
             use the unstable branch, and update it regularly.
       - name: Print PR number
         run: echo Pull request number is ${{ steps.update-nix-flake.outputs.pull-request-number }}.

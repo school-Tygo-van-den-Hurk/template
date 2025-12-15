@@ -13,11 +13,11 @@
       <img src="https://img.shields.io/badge/devcontainer-provided-green?style=flat&logo=docker&logoColor=959DA5" alt="devcontainer provided"/>
     </a>
     <!--~ Repository CI/CD ~-->
-    <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/deploy-github-pages.yml">
-      <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/Deploy%20GitHub%20Pages/badge.svg?style=flat" alt="GitHub deployment status" />
+    <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/push--deploy-github-pages.yml">
+      <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/push--deploy-github-pages.yml/badge.svg?style=flat&event=push" alt="GitHub deployment status" />
     </a>
-    <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/nix-flake-check.yml">
-      <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/Nix%20Flake%20Checks/badge.svg?style=flat" alt="GitHub tests status" />
+    <a href="https://github.com/school-Tygo-van-den-Hurk/template/actions/workflows/many--nix-flake-check.yml">
+      <img src="https://github.com/school-Tygo-van-den-Hurk/template/workflows/many--nix-flake-check.yml/badge.svg?style=flat&event=push" alt="GitHub tests status" />
     </a>
     <!-- Standards -->
       <a href="https://www.conventionalcommits.org/en/v1.0.0/">
