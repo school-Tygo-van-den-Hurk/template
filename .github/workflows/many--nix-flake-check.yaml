@@ -21,7 +21,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.3.0
+        uses: actions/checkout@v6
       - name: Install Nix
         uses: cachix/install-nix-action@v31.7.0
       - name: Generate Nix Matrix
@@ -41,7 +41,7 @@ jobs:
       matrix: ${{fromJSON(needs.build-nix-flake-check-matrix.outputs.matrix)}}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.3.0
+        uses: actions/checkout@v6
       - name: Install Nix
         uses: cachix/install-nix-action@v31.7.0
       - name: Add nix cache

@@ -20,7 +20,7 @@ jobs:
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
       - name: Checkout the repository
-        uses: actions/checkout@v4.3.0
+        uses: actions/checkout@v6
       - name: Install nix using Determinate Systems
         uses: DeterminateSystems/determinate-nix-action@v3.14.0
       - name: Update flake inputs and create Pull Request
