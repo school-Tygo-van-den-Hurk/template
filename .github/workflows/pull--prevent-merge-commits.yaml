@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.3.0
+        uses: actions/checkout@v6
       - name: Check history for merge commits
         uses: NexusPHP/no-merge-commits@v2.2.1
         with:
