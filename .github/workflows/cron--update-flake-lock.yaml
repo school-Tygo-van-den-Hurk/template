@@ -24,7 +24,7 @@ jobs:
       - name: Install nix using Determinate Systems
         uses: DeterminateSystems/determinate-nix-action@v3.14.0
       - name: Update flake inputs and create Pull Request
-        uses: DeterminateSystems/update-flake-lock@v27
+        uses: DeterminateSystems/update-flake-lock@v28
         id: update-nix-flake
         with:
           branch: deps/update-nix-flake-lock-pr/${{ github.run_id }}/${{ steps.date.outputs.date }}
