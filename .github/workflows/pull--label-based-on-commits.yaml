@@ -25,7 +25,7 @@ jobs:
           types=$(yq -r '.[] | select(.type == true) | .name' .github/labels.yaml | paste -sd, -)
           echo "types=$types" >> "$GITHUB_OUTPUT"
       - name: Enforce Conventional Commits
-        uses: webiny/action-conventional-commits@v1.3.0
+        uses: webiny/action-conventional-commits@v1.3.1
         with:
           allowed-commit-types: ${{ steps.extract_types.outputs.types }}
       - name: Label Pull Request based on commits
