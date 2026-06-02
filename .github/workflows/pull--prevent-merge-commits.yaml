@@ -17,6 +17,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4.3.0
       - name: Check history for merge commits
-        uses: NexusPHP/no-merge-commits@v2.2.1
+        uses: NexusPHP/no-merge-commits@v2.4.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
