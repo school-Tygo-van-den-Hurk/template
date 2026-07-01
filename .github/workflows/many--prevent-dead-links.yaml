@@ -23,7 +23,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4.3.0
       - name: Restore lychee cache
-        uses: actions/cache@v5.0.1
+        uses: actions/cache@v6.1.0
         id: restore-cache
         with:
           path: .lycheecache
@@ -45,7 +45,7 @@ jobs:
             --verbose --max-concurrency 1 --hidden --cache
             --max-cache-age 1d
       - name: Save lychee cache
-        uses: actions/cache/save@v5.0.1
+        uses: actions/cache/save@v6.1.0
         with:
           path: .lycheecache
           key: ${{ steps.restore-cache.outputs.cache-primary-key }}
